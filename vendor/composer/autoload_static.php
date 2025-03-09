@@ -39,6 +39,7 @@ class ComposerStaticInit1d560c12643510cc63b801be195b0f51
             'Psr\\Log\\' => 8,
             'Psr\\Container\\' => 14,
             'Psr\\Cache\\' => 10,
+            'Projeto\\' => 8,
         ),
         'D' => 
         array (
@@ -120,6 +121,10 @@ class ComposerStaticInit1d560c12643510cc63b801be195b0f51
         'Psr\\Cache\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/cache/src',
+        ),
+        'Projeto\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/bin/include',
         ),
         'Doctrine\\Persistence\\' => 
         array (

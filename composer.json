@@ -7,6 +7,7 @@
         "doctrine/annotations": "^2.0"
     },
     "autoload": {
-        "psr-0": {"": "src/"}
+        "psr-0": {"": "src/"},
+        "psr-4": {"Projeto\\":"bin/include/"}
     }
 }
