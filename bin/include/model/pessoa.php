@@ -41,7 +41,12 @@ class Pessoa extends Model
         $this->contatos = new ArrayCollection();
     }
 
-    public function gettPesnome()
+    public function getTodos()
+    {
+
+    }
+
+    public function getPesnome()
     {
         return $this->pesnome;
     }

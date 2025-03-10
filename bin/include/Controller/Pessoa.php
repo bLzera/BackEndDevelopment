@@ -12,6 +12,11 @@ class Pessoa extends Controller
         parent::__construct();
     }
 
+    public function index()
+    {
+        
+    }
+
     public function createPessoa($nome, $cpf)
     {
         $pessoa = new ModelPessoa($nome, $cpf);

@@ -6,6 +6,8 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Setup;
 use Projeto\Config;
 
+//TODO : Make separate file for loading entityManager and load it in index.php
+// Pass all persistence responsibility to models
 class Controller extends Config
 {
     protected EntityManager $entityManager;
