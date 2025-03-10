@@ -6,6 +6,4 @@ use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
 
 class Model extends DB
-{
-
-}
+{}

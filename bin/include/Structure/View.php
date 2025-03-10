@@ -3,22 +3,18 @@ namespace Projeto\Structure;
 
 class View
 {
-    protected string $cabecalho;
-    protected string $rodape;
-    protected array $resposta;
+    protected string $body;
 
-    public function __construc($res)
+    public function __construct($res)
+    {}
+
+    protected function load()
     {
-        $this->resposta = $res;
+        return $this->body;
     }
 
-    public function getResposta()
+    public function render()
     {
-        return $this->resposta;
-    }
-
-    public function getMetodo()
-    {
-        return $this->resposta['REQUEST_METHOD'];
+        return $this->load();
     }
 }

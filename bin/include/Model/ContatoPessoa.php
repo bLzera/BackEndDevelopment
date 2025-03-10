@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Table;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Tools\ResolveTargetEntityListener;
 
@@ -17,9 +18,17 @@ class ContatoPessoa extends Pessoa
     #[ManyToOne(inversedBy: 'contatos')]
     private Pessoa $pessoa;
 
+    #[Id]
+    #[Column(type: Types::SMALLINT)]
     private int $seq;
+
+    #[Column(type: Types::SMALLINT)]
     private int $tipid;
+
+    #[Column(length: 30)]
     private string $descricao;
+
+    #[Column(type: Types::SMALLINT)]
     private int $cttsit;
 
     public function __construct($pes, $sequencia, $tipo, $desc, $situacao)

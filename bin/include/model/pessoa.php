@@ -19,7 +19,6 @@ class Pessoa extends Model
 {
     #[Id]
     #[Column(type: Types::INTEGER), GeneratedValue(strategy: 'SEQUENCE')]
-    #[GeneratedValue()]
     protected int $pesid;
 
     #[Column(type: Types::STRING, length: 50)]
