@@ -12,8 +12,7 @@ $controllerClass='Projeto\\Controller\\Controller'.$page;
 if(class_exists($controllerClass))
 {    
     $controller = new $controllerClass($_GET);
-    echo $controller->index();
-    $content = $controller->index();
+    $conteudo = $controller->index();
 } else {echo $controllerClass;}
 ?>
 
