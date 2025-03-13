@@ -13,6 +13,7 @@ class DB extends Config
 
     public function __construct()
     {
+        parent::__construct();
         $this->connx = DriverManager::getConnection($this->connxString);
     }
 

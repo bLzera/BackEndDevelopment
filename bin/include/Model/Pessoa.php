@@ -34,16 +34,25 @@ class Pessoa extends Model
     private Collection $contatos;
 
 
-    public function __construct($nome, $cpf)
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    protected function createPessoa($nome, $cpf)
     {
         $this->pesnome = $nome;
         $this->cpf = $cpf;
         $this->contatos = new ArrayCollection();
     }
 
-    public function getTodos()
+    //TODO : Redefinir método de busca
+    // Se possível, encontrar uma função de %getResult% que retorne objetos
+    public function getAll()
     {
-
+        $query = $this->queryBuilder->select('i.pesnome', 'i.cpf')->from(Pessoa::class, 'i')->getQuery();
+        $res = $query->getResult();
+        return $res;
     }
 
     public function getPesnome()

@@ -1,25 +1,51 @@
 <?php
 namespace Projeto\Structure;
-require_once __DIR__."/../../../vendor/autoload.php";
 
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Tools\Setup;
+use Exception;
 use Projeto\Config;
 
-//TODO : Make separate file for loading entityManager and load it in index.php
-// Pass all persistence responsibility to models
-class Controller extends Config
-{
-    protected EntityManager $entityManager;
+const TIPO_DE_TELA = array
+(
+    "1" => "Consulta",
+    "2" => "Manutencao"
+);
 
-    public function __construct()
+class Controller
+{
+    private string $tipoTela;
+    private object $tela;
+
+    public function __construct($tipo)
     {
-        parent::__construct();
-        $this->entityManager = EntityManager::create($this->connxString, Setup::createAttributeMetadataConfiguration([__DIR__.'/../Model']));
+        $this->tipoTela = TIPO_DE_TELA[$tipo];        
+        $this->defineTela();
     }
 
-    public function flushChanges()
+    protected function defineTela()
     {
-        $this->entityManager->flush();
+        $viewName = 'Projeto\\View\\' . $this->tipoTela . $_GET['page'];
+        if(class_exists($viewName))
+        {
+            $this->tela = new ($viewName);
+        }
+        else
+        {
+            throw new Exception('Tela ' . $viewName . ' não encontrada.');
+        }
+    }
+
+    public function index()
+    {
+        return $this->tela->render();
+    }
+
+    protected function getTipoTela()
+    {
+        return $this->tipoTela;
+    }
+
+    protected function getTela()
+    {
+        return $this->tela;
     }
 }

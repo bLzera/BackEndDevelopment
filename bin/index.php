@@ -1,21 +1,20 @@
 <?php
 session_start();
-require_once __DIR__."/../vendor/autoload.php";
 
-$conteudo = 'Objeto não encontrado - '.$_SESSION['page']. ' -  Public/Style/Style.css';
+require  __DIR__."/../vendor/autoload.php";
+
+$conteudo = '';
 
 $page = $_GET['page'] ?? 'Index';
 
-$controllerClass='Projeto\\Controller\\'.$page;
+$controllerClass='Projeto\\Controller\\Controller'.$page;
+
 if(class_exists($controllerClass))
-{
-    $controller = new $controllerClass;
-    if($_SERVER['REQUEST_METHOD'] === 'POST')
-    {
-        $controller->createPessoa($_POST['nome'], $_POST['cpf']);
-        $controller->flushChanges();
-    }
-}
+{    
+    $controller = new $controllerClass($_GET);
+    echo $controller->index();
+    $content = $controller->index();
+} else {echo $controllerClass;}
 ?>
 
 <!DOCTYPE html>
@@ -23,14 +22,14 @@ if(class_exists($controllerClass))
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="Public/Style/Style.css">
+    <link rel="stylesheet" href="include/Public/Style/Style.css">
     <title>Consulta/Cadastro de Contatos de Pessoas</title>
 </head>
 <body>
 
-    <a href="?page=ConsultaContato">Consulta Contato</a>
-    <a href="?page=Pessoa">Consulta Pessoa</a>
-    <a href="?page=ConsultaTipoContato">Consulta Tipo de Contato</a>
+    <a href="?page=Contato&tipo=1">Contato</a>
+    <a href="?page=Pessoa&tipo=1">Pessoa</a>
+    <a href="?page=TipoContato&tipo=1">Tipo de Contato</a>
 
     <?=$conteudo?>  
 </body>

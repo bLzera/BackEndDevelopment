@@ -1,7 +1,6 @@
 <?php
 namespace Projeto;
 
-
 class Config
 {
     protected array $connxString;

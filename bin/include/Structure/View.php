@@ -3,10 +3,7 @@ namespace Projeto\Structure;
 
 class View
 {
-    protected string $body;
-
-    public function __construct($res)
-    {}
+    protected string $body;    
 
     protected function load()
     {

@@ -4,7 +4,7 @@ use Project\View\Index;
 
 class ConsultaPessoa extends Index
 {
-    public function __construct($pessoas)
+    public function __construct()
     {
         $this->body = '<h1>Lista de pessoas cadastradas:</h1>
             <table>
@@ -13,9 +13,13 @@ class ConsultaPessoa extends Index
                     <th>CPF</th>
                 </tr>
             ';
+    }
+
+    public function populaView($pessoas)
+    {
         foreach($pessoas as $pessoa)
         {
-            $this->body .= '<tr><td>'.$pessoa->getPesnome().'</td><td>'.$pessoa->getCpf().'</td></tr>';
+            $this->body .= '<tr><td>'.$pessoa['pesnome'].'</td><td>'.$pessoa['cpf'].'</td></tr>';
         }
     }
 }
