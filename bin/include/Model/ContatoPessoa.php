@@ -1,22 +1,34 @@
 <?php  
 namespace Projeto\Model;
-require_once(__DIR__."/../../../vendor/autoload.php");
 
-use Projeto\Structure\Model as Model;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Table;
 use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
-use Doctrine\ORM\Tools\ResolveTargetEntityListener;
+use Projeto\Structure\Model;
+use Projeto\Model\TipoContato;
+use Projeto\Model\Pessoa;
 
 #[Entity]
 #[Table(name : 'ctt.tbcontato')]
-class ContatoPessoa extends Pessoa
+class ContatoPessoa extends Model
 {
-    #[ManyToOne(inversedBy: 'contatos')]
+
+    #[ManyToOne(targetEntity: Pessoa::class, inversedBy: 'contatos')]
+    #[JoinColumn(name: 'pesid', referencedColumnName: 'id')]
     private Pessoa $pessoa;
+
+    #[ManyToOne(targetEntity: TipoContato::class, inversedBy: 'contatos')]
+    #[JoinColumn(name: 'tipid', referencedColumnName: 'tipid')]
+    private TipoContato $tipo;
+
+    #[Id]
+    #[Column(type: Types::INTEGER)]
+    private int $pesid;
 
     #[Id]
     #[Column(type: Types::SMALLINT)]
@@ -25,19 +37,23 @@ class ContatoPessoa extends Pessoa
     #[Column(type: Types::SMALLINT)]
     private int $tipid;
 
-    #[Column(length: 30)]
+    #[Column(length: 30, nullable: true)]
     private string $descricao;
 
-    #[Column(type: Types::SMALLINT)]
+    #[Column(type: Types::SMALLINT, options: ["default" => 1])] 
     private int $cttsit;
 
-    public function __construct($pes, $sequencia, $tipo, $desc, $situacao)
+    // Control property for when creating new contacts because compound primary key
+    private int $nextSeq;
+
+    public function __construct()
     {
-        $this->pessoa = $pes;
-        $this->seq = $sequencia;
-        $this->tipid = $tipo;
-        $this->descricao = $desc;
-        $this->cttsit = $situacao;
+        parent::__construct();
+    }
+
+    public function getPesid()
+    {
+        return $this->pesid;
     }
 
     public function getTipo()
@@ -60,26 +76,67 @@ class ContatoPessoa extends Pessoa
         return $this->seq;
     }    
 
-    public function getPessoa()
+    /*public function getPessoa()
     {
         return $this->pessoa;
-    }
+    }*/
 
-    private function setTipo($tipo)
+    public function setTipo($tipo)
     {
         $this->tipid = $tipo;
         return $this;
     }
 
-    private function setDescricao($desc)
+    public function setDescricao($desc)
     {
         $this->descricao = $desc;
         return $this;
     }
 
-    private function setSituacao($situacao)
+    public function setSituacao($situacao)
     {
         $this->cttsit = $situacao;
         return $this;
+    }
+
+    public function buscaDados($pesid = null, $seq = null)
+    {
+        $query = $this->queryBuilder
+            ->select('contato')
+            ->from(Self::class, 'contato');
+        if(isset($pesid))
+        {
+            $query->andWhere('contato.pesid = :pesid')
+                ->setParameter('pesid', $pesid);
+        }
+        if(isset($seq))
+        {
+            $query->andWhere('contato.seq = :seq')
+                ->setParameter('seq', $seq);
+        }
+        $res = $query->getQuery()->execute(null, AbstractQuery::HYDRATE_OBJECT);
+        return var_dump($res);   
+    }
+
+    private function getNextSeq()
+    {
+        $query = $this->queryBuilder
+            ->select('MAX(contato.seq)')
+            ->from(Self::class, 'contato')
+            ->where('pesid = :pesid')
+            ->setParameter('pesid', $this->pesid)
+            ->getQuery();
+        $res = $query->execute(null, AbstractQuery::HYDRATE_SINGLE_SCALAR);
+        return $res;
+    }
+
+    public function getAll()
+    {
+        $query = $this->queryBuilder
+            ->select('contatos')
+            ->from(Self::class, 'contatos')
+            ->getQuery();
+        $res = $query->getResult();
+        return $res;
     }
 }

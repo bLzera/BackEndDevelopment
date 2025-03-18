@@ -8,6 +8,7 @@ fwrite(
     '[Warning] The use of this script is discouraged. See'
     . ' https://www.doctrine-project.org/projects/doctrine-orm/en/current/reference/tools.html#doctrine-console'
     . ' for instructions on bootstrapping the console runner.'
+    . getcwd()
     . PHP_EOL
 );
 

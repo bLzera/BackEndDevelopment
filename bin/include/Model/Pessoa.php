@@ -1,6 +1,5 @@
 <?php
 namespace Projeto\Model;
-require_once(__DIR__."/../../../vendor/autoload.php");
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -10,16 +9,19 @@ use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\Table;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\Mapping\OneToMany;
 use Projeto\Structure\Model;
+
 
 #[Entity]
 #[Table(name: 'ctt.tbpessoa')]
 class Pessoa extends Model
 {
+
     #[Id]
-    #[Column(type: Types::INTEGER), GeneratedValue(strategy: 'SEQUENCE')]
-    protected int $pesid;
+    #[Column(type: Types::INTEGER), GeneratedValue(strategy: 'IDENTITY')]
+    private int $id;
 
     #[Column(type: Types::STRING, length: 50)]
     private string $pesnome;
@@ -27,7 +29,7 @@ class Pessoa extends Model
     #[Column(type: Types::STRING, length: 11)]
     private string $cpf;
 
-    #[Column(type: Types::INTEGER)]
+    #[Column(type: Types::SMALLINT, options: ["default" => 1])]
     private int $pessit;
 
     #[OneToMany(targetEntity: ContatoPessoa::class, mappedBy: 'pessoa')]
@@ -37,22 +39,39 @@ class Pessoa extends Model
     public function __construct()
     {
         parent::__construct();
-    }
-
-    protected function createPessoa($nome, $cpf)
-    {
-        $this->pesnome = $nome;
-        $this->cpf = $cpf;
         $this->contatos = new ArrayCollection();
     }
 
-    //TODO : Redefinir método de busca
-    // Se possível, encontrar uma função de %getResult% que retorne objetos
+    public function createPessoa($nome, $cpf)
+    {
+        $this->pesnome = $nome;
+        $this->cpf = $cpf;
+    }
+
+    public function buscaDados($id)
+    {
+        $query = $this->queryBuilder
+            ->select('pessoa')
+            ->from(Self::class, 'pessoa')
+            ->where('id = :id')
+            ->setParameter('id', $id)
+            ->getQuery();
+        $res = $query->execute(null, AbstractQuery::HYDRATE_SIMPLEOBJECT);
+    }
+
     public function getAll()
     {
-        $query = $this->queryBuilder->select('i.pesnome', 'i.cpf')->from(Pessoa::class, 'i')->getQuery();
-        $res = $query->getResult();
+        $query = $this->queryBuilder
+            ->select('pessoa')
+            ->from(Self::class, 'pessoa')
+            ->getQuery();
+        $res = $query->getResult(AbstractQuery::HYDRATE_SIMPLEOBJECT);
         return $res;
+    }
+
+    public function getContatos()
+    {
+        return $this->contatos;
     }
 
     public function getPesnome()
@@ -65,19 +84,14 @@ class Pessoa extends Model
         return $this->cpf;
     }
     
-    public function getPesid()
+    public function getId()
     {
-        return $this->pesid;
+        return $this->id;
     }
 
     public function getPessit()
     {
         return $this->pessit;
-    }
-
-    public function getContatos()
-    {
-        return $this->contatos;
     }
 
     private function setPesnome($nome)

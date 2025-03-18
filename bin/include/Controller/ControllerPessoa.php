@@ -1,7 +1,7 @@
 <?php
 namespace Projeto\Controller;
 
-use Projeto\Model\Pessoa as ModelPessoa;
+use Projeto\Model\Pessoa;
 use Projeto\Structure\Controller;
 
 class ControllerPessoa extends Controller
@@ -14,14 +14,14 @@ class ControllerPessoa extends Controller
 
     public function createPessoa($nome, $cpf)
     {
-        $pessoa = new ModelPessoa($nome, $cpf);
+        $pessoa = new Pessoa($nome, $cpf);
     }
 
     public function index()
     {
         if($this->getTipoTela() == 'Consulta')
         {
-            $model = new ModelPessoa();
+            $model = new Pessoa();
             $pessoas = $model->getAll();
             $this->getTela()->populaView($pessoas);
             return $this->getTela()->render();

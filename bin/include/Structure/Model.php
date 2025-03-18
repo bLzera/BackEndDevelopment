@@ -1,6 +1,5 @@
 <?php
 namespace Projeto\Structure;
-require_once(__DIR__."/../../../vendor/autoload.php");
 
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Setup;
@@ -16,5 +15,6 @@ class Model extends DB
         parent::__construct();
         $this->entityManager = EntityManager::create($this->connxString, Setup::createAttributeMetadataConfiguration([__DIR__.'/Model/']));
         $this->queryBuilder = $this->entityManager->createQueryBuilder();
+        $this->entityManager->getConfiguration()->setProxyDir('C:\Users\biel\AppData\Local\Temp');
     }
 }

@@ -19,7 +19,12 @@ class ConsultaPessoa extends Index
     {
         foreach($pessoas as $pessoa)
         {
-            $this->body .= '<tr><td>'.$pessoa['pesnome'].'</td><td>'.$pessoa['cpf'].'</td></tr>';
+            $this->body .= '<tr>
+                <td>'.$pessoa->getId().'</td>
+                <td>'.$pessoa->getPesnome().'</td>
+                <td>'.$pessoa->getCpf().'</td>
+                <td><a href="?page=Contato&tipo=1&pesid='.$pessoa->getId().'">contatos</a></td>
+            </tr>';
         }
     }
 }
