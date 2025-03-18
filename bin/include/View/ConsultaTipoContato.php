@@ -3,28 +3,26 @@ namespace Projeto\View;
 
 use Projeto\Structure\View;
 
-class ConsultaContato extends View
+class ConsultaTipoContato extends View
 {
     public function __construct($tipo, $tela)
     {
         parent::__construct($tipo, $tela);
         $this->body .= 
         '<tr>
-            <td>Pessoa ID</td>
-            <td>Sequência</td>
+            <td>ID</td>
             <td>Descrição</td>
         </tr>';
     }
 
-    public function populaView($contatos)
+    public function populaView($tiposcontato)
     {
-        foreach($contatos as $contato)
+        foreach($tiposcontato as $tipocontato)
         {
             $this->body .= 
             '<tr>
-                <td>'.$contato->getPesid().'</td>
-                <td>'.$contato->getSequencia().'</td>
-                <td>'.$contato->getDescricao().'</td>
+                <td>'.$tipocontato->getTipid().'</td>
+                <td>'.$tipocontato->getTipdesc().'</td>
             </tr>';
         }
     }

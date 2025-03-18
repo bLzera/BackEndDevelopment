@@ -3,11 +3,23 @@ namespace Projeto\Structure;
 
 class View
 {
-    protected string $body;    
+    protected string $body = '';    
 
-    public function __construct()
+    public function __construct($tipo = 0, $tela = null)
     {
-        $this->body = '';
+        switch($tipo)
+        {
+            case 0 : '';
+                break;
+            case 1 :  
+                $this->body = '<h1>Tela de '.$tela.':</h1>
+                                <table>';
+                break;
+            case 2 : 
+                $this->body = '<h1>CADASTROOOOO:</h1>';
+                break;
+        }
+        
     }
 
     protected function load()

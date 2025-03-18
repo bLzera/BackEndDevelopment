@@ -114,8 +114,8 @@ class ContatoPessoa extends Model
             $query->andWhere('contato.seq = :seq')
                 ->setParameter('seq', $seq);
         }
-        $res = $query->getQuery()->execute(null, AbstractQuery::HYDRATE_OBJECT);
-        return var_dump($res);   
+        $res = $query->getQuery()->getResult(AbstractQuery::HYDRATE_SIMPLEOBJECT);
+        return $res;   
     }
 
     private function getNextSeq()

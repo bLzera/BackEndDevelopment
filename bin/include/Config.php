@@ -3,6 +3,11 @@ namespace Projeto;
 
 class Config
 {
+    const TIPO_TELA = [        
+            "1" => "Consulta",
+            "2" => "Manutencao"
+    ];
+
     protected array $connxString;
     protected string $dbname;
     protected string $user;

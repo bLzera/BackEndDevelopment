@@ -1,0 +1,6 @@
+-- SCHEMA: ctt
+
+-- DROP SCHEMA IF EXISTS ctt ;
+
+CREATE SCHEMA IF NOT EXISTS ctt
+    AUTHORIZATION postgres;

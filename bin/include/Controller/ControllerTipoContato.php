@@ -1,10 +1,10 @@
 <?php
 namespace Projeto\Controller;
 
-use Projeto\Model\Pessoa;
+use Projeto\Model\TipoContato;
 use Projeto\Structure\Controller;
 
-class ControllerPessoa extends Controller
+class ControllerTipoContato extends Controller
 {
 
     public function __construct($params)
@@ -12,18 +12,13 @@ class ControllerPessoa extends Controller
         parent::__construct($params);
     }
 
-    public function createPessoa($nome, $cpf)
-    {
-        $pessoa = new Pessoa($nome, $cpf);
-    }
-
     public function index()
     {
         if($this->getTipoTela() == 'Consulta')
         {
-            $model = new Pessoa();
-            $pessoas = $model->getAll();
-            $this->getTela()->populaView($pessoas);
+            $model = new TipoContato();
+            $tiposcontato = $model->getAll();
+            $this->getTela()->populaView($tiposcontato);
             return $this->getTela()->render();
         }        
     }

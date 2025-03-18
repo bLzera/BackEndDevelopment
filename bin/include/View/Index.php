@@ -6,8 +6,8 @@ require_once(__DIR__."/../../../vendor/autoload.php");
 
 class Index extends View
 {
-    public function __construct()
+    public function __construct($tipo, $tela)
     {
-        $this->body = 'teste';
+        parent::__construct($tipo, $tela);
     }
 }

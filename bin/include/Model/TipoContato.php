@@ -29,6 +29,7 @@ class TipoContato extends Model
 
     public function __construct()
     {
+        parent::__construct();
         $this->contatos = new ArrayCollection();
     }
 
@@ -47,4 +48,13 @@ class TipoContato extends Model
         $this->tipdesc = $descricao;
     }
 
+    public function getAll()
+    {
+        $query = $this->queryBuilder
+            ->select('tipocontato')
+            ->from(Self::class, 'tipocontato')
+            ->getQuery();
+        $res = $query->getResult();
+        return $res;
+    }
 }

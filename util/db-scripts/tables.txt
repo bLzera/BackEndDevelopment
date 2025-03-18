@@ -1,0 +1,60 @@
+-- Table: ctt.tbcontato
+
+-- DROP TABLE IF EXISTS ctt.tbcontato;
+
+CREATE TABLE IF NOT EXISTS ctt.tbcontato
+(
+    pesid integer NOT NULL,
+    seq smallint NOT NULL,
+    tipid smallint NOT NULL,
+    descricao character varying(30) COLLATE pg_catalog."default",
+    cttsit smallint NOT NULL DEFAULT 1,
+    CONSTRAINT pk_pesid_seq_tbcontato PRIMARY KEY (pesid, seq),
+    CONSTRAINT fk_pesid_tbcontato FOREIGN KEY (pesid)
+        REFERENCES ctt.tbpessoa (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT fk_tipid_tbcontato FOREIGN KEY (tipid)
+        REFERENCES ctt.tbtipocontato (tipid) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS ctt.tbcontato
+    OWNER to postgres;
+
+-- Table: ctt.tbpessoa
+
+-- DROP TABLE IF EXISTS ctt.tbpessoa;
+
+CREATE TABLE IF NOT EXISTS ctt.tbpessoa
+(
+    id integer NOT NULL DEFAULT nextval('ctt.tbpessoa_id_seq'::regclass),
+    pesnome character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    cpf character varying(11) COLLATE pg_catalog."default" NOT NULL,
+    pessit smallint NOT NULL DEFAULT 1,
+    CONSTRAINT pk_pesid_tbpessoa PRIMARY KEY (id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS ctt.tbpessoa
+    OWNER to postgres;
+
+    -- Table: ctt.tbtipocontato
+
+-- DROP TABLE IF EXISTS ctt.tbtipocontato;
+
+CREATE TABLE IF NOT EXISTS ctt.tbtipocontato
+(
+    tipid integer NOT NULL DEFAULT nextval('ctt.tbtipocontato_tipid_seq'::regclass),
+    tipdesc character varying(20) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT pk_tipid_tbtipocontato PRIMARY KEY (tipid)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS ctt.tbtipocontato
+    OWNER to postgres;
