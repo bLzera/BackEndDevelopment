@@ -7,12 +7,8 @@ class CadastraPessoa extends Index
 {
     public function __construct($tipo, $tela)
     {
-        parent::__construct($tipo, $tela);        
-        $this->addContent(
-
-            ''
-
-        );
+        parent::__construct($tipo, $tela);
+         
     }
     
     public function populaView($registros)

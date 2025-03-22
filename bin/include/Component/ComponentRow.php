@@ -31,6 +31,11 @@ class ComponentRow extends Component
         return $this->linha;
     }
 
+    public function getQuantidade()
+    {
+        return $this->quantidade;
+    }
+
     /**
      * Method for future ComponentField customization
      * eventually you should be able to declare new ComponentField('name', position)

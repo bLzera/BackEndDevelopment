@@ -25,14 +25,14 @@ if(class_exists($controllerClass))
     <title>Consulta/Cadastro de Contatos de Pessoas</title>
 </head>
 <body>
-    <div class="navbar" id="navbar__container">
+    <div class="container navbar__container" id="navbar__container">
         <a href="?page=Index">Home</a>
         <a href="?page=Pessoa&tipo=1">Pessoa</a>
         <a href="?page=Contato&tipo=1">Contato</a>
         <a href="?page=TipoContato&tipo=1">Tipo de Contato</a>
     </div>
 
-    <div class="conteudo__container" id="conteudo__container">
+    <div class="container conteudo__container" id="conteudo__container">
         <?=$conteudo?>
     </div>
 
