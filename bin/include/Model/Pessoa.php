@@ -35,7 +35,6 @@ class Pessoa extends Model
     #[OneToMany(targetEntity: ContatoPessoa::class, mappedBy: 'pessoa')]
     private Collection $contatos;
 
-
     public function __construct()
     {
         parent::__construct();
@@ -48,6 +47,11 @@ class Pessoa extends Model
         $this->cpf = $cpf;
     }
 
+    public function desativaPessoa($id)
+    {
+        
+    }
+
     public function buscaDados($id)
     {
         $query = $this->queryBuilder
@@ -57,6 +61,7 @@ class Pessoa extends Model
             ->setParameter('id', $id)
             ->getQuery();
         $res = $query->execute(null, AbstractQuery::HYDRATE_SIMPLEOBJECT);
+        return $res;
     }
 
     public function getAll()
@@ -94,13 +99,13 @@ class Pessoa extends Model
         return $this->pessit;
     }
 
-    private function setPesnome($nome)
+    protected function setPesnome($nome)
     {
         $this->pesnome = $nome;
         return $this;
     }
 
-    private function setCpf($cpf)
+    protected function setCpf($cpf)
     {
         $this->cpf = $cpf;
         return $this;

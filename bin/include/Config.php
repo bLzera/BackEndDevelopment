@@ -5,7 +5,7 @@ class Config
 {
     const TIPO_TELA = [        
             "1" => "Consulta",
-            "2" => "Manutencao"
+            "2" => "Cadastra"
     ];
 
     protected array $connxString;

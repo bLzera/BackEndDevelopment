@@ -26,5 +26,9 @@ class ControllerPessoa extends Controller
             $this->getTela()->populaView($pessoas);
             return $this->getTela()->render();
         }        
+        else if($this->getTipoTela() == 'Cadastra')
+        {
+            return $this->getTela()->render();
+        }
     }
 }

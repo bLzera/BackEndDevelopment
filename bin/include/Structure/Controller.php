@@ -23,7 +23,7 @@ class Controller extends Config
         $viewName = 'Projeto\\View\\' . $this->tipoTela . $this->params['page'];
         if(class_exists($viewName))
         {
-            $this->tela = new ($viewName)((int)$this->params['tipo'], $this->params['page']);
+            $this->tela = new ($viewName)($this->params['tipo'], $this->params['page']);
         }
         else
         {

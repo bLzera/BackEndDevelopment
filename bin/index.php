@@ -13,7 +13,7 @@ if(class_exists($controllerClass))
 {    
     $controller = new $controllerClass($_GET);
     $conteudo = $controller->index();
-} else {echo $controllerClass;}
+}
 ?>
 
 <!DOCTYPE html>
@@ -25,11 +25,16 @@ if(class_exists($controllerClass))
     <title>Consulta/Cadastro de Contatos de Pessoas</title>
 </head>
 <body>
+    <div class="navbar" id="navbar__container">
+        <a href="?page=Index">Home</a>
+        <a href="?page=Pessoa&tipo=1">Pessoa</a>
+        <a href="?page=Contato&tipo=1">Contato</a>
+        <a href="?page=TipoContato&tipo=1">Tipo de Contato</a>
+    </div>
 
-    <a href="?page=Contato&tipo=1">Contato</a>
-    <a href="?page=Pessoa&tipo=1">Pessoa</a>
-    <a href="?page=TipoContato&tipo=1">Tipo de Contato</a>
+    <div class="conteudo__container" id="conteudo__container">
+        <?=$conteudo?>
+    </div>
 
-    <?=$conteudo?>  
 </body>
 </html>

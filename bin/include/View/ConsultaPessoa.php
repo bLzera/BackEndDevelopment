@@ -7,27 +7,33 @@ class ConsultaPessoa extends Index
     public function __construct($tipo, $tela)
     {
         parent::__construct($tipo, $tela);
-        $this->body .= '
-                <tr>
+        $this->addContent(
+            
+            '<tr>
                     <th>ID</th>
                     <th>Nome</th>
                     <th>CPF</th>
                     <th>Contatos</th>
-                </tr>
-            ';
+            </tr>
+            <a href="?page=Pessoa&tipo=2">Tela de Cadastro</a>'
+            
+            );
     }
 
-    public function populaView($pessoas)
+    public function populaView($registros)
     {
-        foreach($pessoas as $pessoa)
+        foreach($registros as $pessoa)
         {
-            $this->body .= 
+            $this->addContent(            
+                
             '<tr>
                 <td>'.$pessoa->getId().'</td>
                 <td>'.$pessoa->getPesnome().'</td>
                 <td>'.$pessoa->getCpf().'</td>
                 <td><a href="?page=Contato&tipo=1&pesid='.$pessoa->getId().'">O</a></td>
-            </tr>';
+            </tr>'
+    
+            );
         }
     }
 }

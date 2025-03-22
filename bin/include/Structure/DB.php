@@ -5,8 +5,6 @@ use Doctrine\DBAL\Connection as DBALConnection;
 use Doctrine\DBAL\DriverManager;
 use Projeto\Config;
 
-require_once(__DIR__.'/../../../vendor/autoload.php');
-
 class DB extends Config
 {
     protected DBALConnection $connx;

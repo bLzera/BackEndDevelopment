@@ -1,6 +1,8 @@
 <?php
 namespace Projeto\View;
 
+use Projeto\Component\ComponentField;
+use Projeto\Component\ComponentRow;
 use Projeto\Structure\View;
 
 class ConsultaContato extends View
@@ -8,24 +10,25 @@ class ConsultaContato extends View
     public function __construct($tipo, $tela)
     {
         parent::__construct($tipo, $tela);
-        $this->body .= 
-        '<tr>
-            <td>Pessoa ID</td>
-            <td>Sequência</td>
-            <td>Descrição</td>
-        </tr>';
+
+        $pessoaId = new ComponentField('Pessoa ID');
+        $sequencia = new ComponentField('Sequência');
+        $descricao = new ComponentField('Descrição');
+
+        $linha = new ComponentRow([$pessoaId, $sequencia, $descricao]);
+        $this->setHeaderFields($linha);
     }
 
-    public function populaView($contatos)
+    public function populaView($registros)
     {
-        foreach($contatos as $contato)
+        foreach($registros as $contato)
         {
-            $this->body .= 
-            '<tr>
-                <td>'.$contato->getPesid().'</td>
-                <td>'.$contato->getSequencia().'</td>
-                <td>'.$contato->getDescricao().'</td>
-            </tr>';
+            $pessoaId = new ComponentField($contato->getPesid());
+            $sequencia = new ComponentField($contato->getSequencia());
+            $descricao = new ComponentField($contato->getDescricao());
+            
+            $linha = new ComponentRow([$pessoaId, $sequencia, $descricao]);
+            $this->setContentFields($linha);
         }
     }
 }
