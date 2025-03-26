@@ -3,11 +3,11 @@ namespace Projeto\Component;
 
 use Projeto\Structure\Component;
 
-class ComponentRow extends Component
+class ComponentRow
 {
     private int $quantidade;
     private int $pos = 0;
-    
+
     public function __construct(private array $linha)
     {
         $this->quantidade = count($linha);
@@ -37,7 +37,7 @@ class ComponentRow extends Component
     }
 
     /**
-     * Method for future ComponentField customization
+     * Methods for future ComponentField implementation
      * eventually you should be able to declare new ComponentField('name', position)
      * where position is an integer that defines the position
      * needs a lot of validation and management for mixed arrays of position-declared ComponentFields and not-position-declared ComponentFields

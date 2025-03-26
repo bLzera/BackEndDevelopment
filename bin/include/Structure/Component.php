@@ -1,8 +1,9 @@
 <?php
 namespace Projeto\Structure;
 
-class Component
+use Projeto\Config;
+
+class Component extends Config
 {
-    public function __contruct()
-    {}    
+    public function __contruct(){}    
 }

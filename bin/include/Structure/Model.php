@@ -17,4 +17,10 @@ class Model extends DB
         $this->queryBuilder = $this->entityManager->createQueryBuilder();
         $this->entityManager->getConfiguration()->setProxyDir('C:\Users\biel\AppData\Local\Temp');
     }
+
+    public function flushChanges()
+    {
+        $this->entityManager->persist($this);
+        $this->entityManager->flush();
+    }
 }

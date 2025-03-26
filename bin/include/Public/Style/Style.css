@@ -57,3 +57,38 @@ body{
 .tabela__conteudo{
     width: 100%;
 }
+
+.formulario__conteudo{
+    width: 50%;
+    height: 80%;    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form__footer{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: centera;
+}
+
+.header__conteudo{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.hidden__input{
+    display: none;
+}
+
+.input__row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

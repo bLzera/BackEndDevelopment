@@ -10,13 +10,13 @@ class ConsultaPessoa extends Index
     {
         parent::__construct($tipo, $tela);
 
-        $id = new ComponentField('ID');
-        $nome = new ComponentField('Nome');
-        $cpf = new ComponentField('CPF');
-        
-        $contatos = new ComponentField('Contatos');
+        $id = new ComponentField('id', 'ID');
+        $nome = new ComponentField('nome', 'Nome');
+        $cpf = new ComponentField('cpf', 'CPF');
 
-        $linha = new ComponentRow([$id, $nome, $cpf]);
+        $contatos = new ComponentField('contatos', 'Contatos');
+
+        $linha = new ComponentRow([$id, $nome, $cpf, $contatos]);
         $this->setHeaderFields($linha);
     }
 
@@ -24,12 +24,12 @@ class ConsultaPessoa extends Index
     {
         foreach($registros as $pessoa)
         {
+            $id = new ComponentField('id', $pessoa->getId());
+            $nome = new ComponentField('nome', $pessoa->getPesnome());
+            $cpf = new ComponentField('cpf', $pessoa->getCpf());
+            $contatos = new ComponentField('contatos', '<a href="?page=Contato&tipo=1&pesid='.$pessoa->getId().'">CONTATO</a>');
 
-            $id = new ComponentField($pessoa->getId());
-            $nome = new ComponentField($pessoa->getPesnome());
-            $cpf = new ComponentField($pessoa->getCpf());
-
-            $linha = new ComponentRow([$id, $nome, $cpf]);
+            $linha = new ComponentRow([$id, $nome, $cpf, $contatos]);
             $this->setContentFields($linha);
         }
     }

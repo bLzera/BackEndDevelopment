@@ -11,8 +11,8 @@ class ConsultaTipoContato extends View
     {
         parent::__construct($tipo, $tela);
 
-        $id = new ComponentField('ID');
-        $descricao = new ComponentField('Descrição');
+        $id = new ComponentField('id', 'ID');
+        $descricao = new ComponentField('descricao', 'Descrição');
 
         $linha = new ComponentRow([$id, $descricao]);
         $this->setHeaderFields($linha);
@@ -23,8 +23,8 @@ class ConsultaTipoContato extends View
         foreach($registros as $tipocontato)
         {
 
-            $id = new ComponentField($tipocontato->getTipid());
-            $descricao = new ComponentField($tipocontato->getTipdesc());
+            $id = new ComponentField('id', $tipocontato->getTipid());
+            $descricao = new ComponentField('descricao', $tipocontato->getTipdesc());
 
             $linha = new ComponentRow([$id, $descricao]);
             $this->setContentFields($linha);

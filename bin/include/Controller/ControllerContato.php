@@ -6,21 +6,11 @@ use Projeto\Structure\Controller;
 
 class ControllerContato extends Controller
 {
-    public function __construct($params)
+    public function __construct($params, $method)
     {
-        parent::__construct($params);
+        parent::__construct($params, $method);
     }
-    
-    // TODO : Make this better
-    // disgusting method
-    // every model is going to have:
-    //      buscaDados();
-    //      getAll();
-    // these are going to be the two main methods for grabbing data for now
-    // so maybe give the buscaDados() method our $controller->params
-    // or go through $controller->params, grab the model parameters and stash in another array
-    // and pass the new $controller->modelParams our model parameters
-    // and probably do the same thing for the view parameters
+
     private function busca($model)
     {
         if(isset($this->params['pesid']))
@@ -32,16 +22,14 @@ class ControllerContato extends Controller
 
     public function index()
     {
-        //TODO : Make this better as well
-        // 
         if($this->getTipoTela() == 'Consulta')
-
         {
             $model = new ContatoPessoa();
             $contatos = $this->busca($model);
             $this->getTela()->populaView($contatos);
             return $this->getTela()->render();
-        } else if($this->getTipoTela() == 'Cadastro')
+        } 
+        else if($this->getTipoTela() == 'Cadastro')
         {
             $this->getTela()->forceBody('ta funcionando mais ou menos');
         }

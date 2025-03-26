@@ -5,15 +5,25 @@ require_once __DIR__."/../vendor/autoload.php";
 
 $conteudo = '';
 
-$page = $_GET['page'] ?? 'Index';
+$method = $_SERVER['REQUEST_METHOD'];
 
-$controllerClass='Projeto\\Controller\\Controller'.$page;
+switch($method)
+{
+    case 'POST' : $params = $_POST;
+    break;
+    case 'GET' : $params = $_GET;
+    break;
+    default : throw 'Invalid Method';
+}
+
+$controllerClass='Projeto\\Controller\\Controller'.$params['page'];
 
 if(class_exists($controllerClass))
 {    
-    $controller = new $controllerClass($_GET);
+    $controller = new $controllerClass($params, $method);
     $conteudo = $controller->index();
 }
+0
 ?>
 
 <!DOCTYPE html>

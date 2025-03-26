@@ -7,9 +7,9 @@ use Projeto\Structure\Controller;
 class ControllerTipoContato extends Controller
 {
 
-    public function __construct($params)
+    public function __construct($params, $method)
     {
-        parent::__construct($params);
+        parent::__construct($params, $method);
     }
 
     public function index()

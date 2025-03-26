@@ -45,22 +45,26 @@ class Pessoa extends Model
     {
         $this->pesnome = $nome;
         $this->cpf = $cpf;
+        $this->pessit = 1;
     }
 
-    public function desativaPessoa($id)
-    {
-        
-    }
-
-    public function buscaDados($id)
+    public function buscaDados($id, $nome)
     {
         $query = $this->queryBuilder
             ->select('pessoa')
-            ->from(Self::class, 'pessoa')
-            ->where('id = :id')
-            ->setParameter('id', $id)
-            ->getQuery();
-        $res = $query->execute(null, AbstractQuery::HYDRATE_SIMPLEOBJECT);
+            ->from(Self::class, 'pessoa');
+        if(isset($id))
+        {
+            $query->andWhere('id = :id')
+                ->setParameter('id', $id);                
+        }
+        if(isset($nome))
+        {
+            $query->andWhere(
+                $query->expr()->like('pesnome', ':nome')
+            )->setParameter('nome', $nome);
+        }
+        $res = $query->getQuery()->getResult(AbstractQuery::HYDRATE_SIMPLEOBJECT);
         return $res;
     }
 

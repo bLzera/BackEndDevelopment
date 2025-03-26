@@ -11,9 +11,9 @@ class ConsultaContato extends View
     {
         parent::__construct($tipo, $tela);
 
-        $pessoaId = new ComponentField('Pessoa ID');
-        $sequencia = new ComponentField('Sequência');
-        $descricao = new ComponentField('Descrição');
+        $pessoaId = new ComponentField('pesid', 'Pessoa ID');
+        $sequencia = new ComponentField('sequencia', 'Sequência');
+        $descricao = new ComponentField('descricao', 'Descrição');
 
         $linha = new ComponentRow([$pessoaId, $sequencia, $descricao]);
         $this->setHeaderFields($linha);
@@ -23,9 +23,9 @@ class ConsultaContato extends View
     {
         foreach($registros as $contato)
         {
-            $pessoaId = new ComponentField($contato->getPesid());
-            $sequencia = new ComponentField($contato->getSequencia());
-            $descricao = new ComponentField($contato->getDescricao());
+            $pessoaId = new ComponentField('pesid', $contato->getPesid());
+            $sequencia = new ComponentField('sequencia', $contato->getSequencia());
+            $descricao = new ComponentField('descricao', $contato->getDescricao());
             
             $linha = new ComponentRow([$pessoaId, $sequencia, $descricao]);
             $this->setContentFields($linha);
